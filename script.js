@@ -74,6 +74,9 @@ const GameController = (() => {
 
     const messageDisplay = document.getElementById('message');
 
+    let playerXScoreDisplay = null;
+    let playerOScoreDisplay = null;
+
     const switchPlayer = () => {
         currentPlayer = (currentPlayer === playerX) ? playerO : playerX;
         messageDisplay.textContent = `${currentPlayer.name}'s Turn`;
@@ -117,8 +120,12 @@ const GameController = (() => {
         resetButton.addEventListener('click', () => {
             Gameboard.reset();
             currentPlayer = playerX;
-            messageDisplay.textContent = `${currentPlayer.anem}'s Turn`;
+            messageDisplay.textContent = `${currentPlayer.name}'s Turn`;
             gameActive = true;
+            playerXScore = 0;
+            playerOScore = 0;
+            playerXScoreDisplay.textContent = playerXScore;
+            playerOScoreDisplay.textContent = playerOScore;
         });
     };
    
@@ -155,7 +162,7 @@ const GameController = (() => {
 
         if(!board.includes("") && !checkWin()) {
             gameActive = false;
-            messageDisplay.textContent = "It`s a Draw!";
+            messageDisplay.textContent = "It's a Draw!";
             return true;
         }
         return false;
