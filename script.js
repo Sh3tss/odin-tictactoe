@@ -54,6 +54,24 @@ const GameController = (() => {
     const playerO = Player("Player O", "O");
     let currentPlayer = playerX;
 
+    const winConditions = [
+        //win condition line
+        [0, 1, 2],
+        [3, 4, 5],
+        [6, 7, 8],
+        //win condition column
+        [0, 3, 6],
+        [1, 4, 7],
+        [2, 5, 8],
+        //win condition diagonal 
+        [0, 4, 8],
+        [2, 4, 6]
+    ];
+    
+    let gameActive = true;
+    let playerXScore = 0;
+    let playerOScore = 0;
+
     const messageDisplay = document.getElementById('message');
 
     const switchPlayer = () => {
@@ -62,6 +80,9 @@ const GameController = (() => {
     };
 
     const initializeGame = () => {
+        const playerXScoreDisplay = document.getElementById('playerXScore');
+        const playerOScoreDisplay = document.getElementById('playerOScore');
+
         Gameboard.render();
         messageDisplay.textContent = `${currentPlayer.name}'s Turn!`;
 
@@ -100,27 +121,7 @@ const GameController = (() => {
             gameActive = true;
         });
     };
-    const winConditions = [
-        //win condition line
-        [0, 1, 2],
-        [3, 4, 5],
-        [6, 7, 8],
-        //win condition column
-        [0, 3, 6],
-        [1, 4, 7],
-        [2, 5, 8],
-        //win condition diagonal 
-        [0, 4, 8],
-        [2, 4, 6]
-    ];
-    
-    let gameActive = true;
-
-    const playerXScoreDisplay = document.getElementById('playerXScore');
-    const playerOScoreDisplay = document.getElementById('playerOScore');
-
-    let playerXScore = 0;
-    let playerOScore = 0;
+   
     const checkWin = () => {
         const board = Gameboard.getBoard();
 
