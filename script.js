@@ -76,7 +76,7 @@ const GameController = (() => {
         });
 
         const startButton = document.getElementById('startButton');
-        const resetButton = documento.getElementById('resetButton');
+        const resetButton = document.getElementById('resetButton');
         
         startButton.addEventListener('click', () => {
             Gameboard.reset();
