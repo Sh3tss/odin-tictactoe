@@ -55,36 +55,31 @@ const GameController = (() => {
     let currentPlayer = playerX;
 
     const winConditions = [
-        //win condition line
-        [0, 1, 2],
-        [3, 4, 5],
-        [6, 7, 8],
-        //win condition column
-        [0, 3, 6],
-        [1, 4, 7],
-        [2, 5, 8],
-        //win condition diagonal 
-        [0, 4, 8],
-        [2, 4, 6]
+        //lines
+        [0, 1, 2], [3, 4, 5], [6, 7, 8],
+         // columns
+        [0, 3, 6], [1, 4, 7], [2, 5, 8],
+         //diagonals
+        [0, 4, 8], [2, 4, 6]            
     ];
-    
+
     let gameActive = true;
     let playerXScore = 0;
     let playerOScore = 0;
 
-    const messageDisplay = document.getElementById('message');
-
-    let playerXScoreDisplay = null;
-    let playerOScoreDisplay = null;
+    let messageDisplay;
+    let playerXScoreDisplay;
+    let playerOScoreDisplay;
 
     const switchPlayer = () => {
         currentPlayer = (currentPlayer === playerX) ? playerO : playerX;
-        messageDisplay.textContent = `${currentPlayer.name}'s Turn`;
+        messageDisplay.textContent = `${currentPlayer.name}'s Turn!`;
     };
 
     const initializeGame = () => {
-        const playerXScoreDisplay = document.getElementById('playerXScore');
-        const playerOScoreDisplay = document.getElementById('playerOScore');
+        messageDisplay = document.getElementById('message');
+        playerXScoreDisplay = document.getElementById('playerXScore'); 
+        playerOScoreDisplay = document.getElementById('playerOScore');   
 
         Gameboard.render();
         messageDisplay.textContent = `${currentPlayer.name}'s Turn!`;
@@ -96,10 +91,13 @@ const GameController = (() => {
             if (event.target.classList.contains('cell')) {
                 const index = parseInt(event.target.dataset.index);
                 if (Gameboard.updateCell(index, currentPlayer.marker)) {
-                    if (checkWin()) {
+                    const winnerFound = checkWin();
+                    if (winnerFound) {
                         return;
                     }
-                    if(checkDraw()) {
+
+                    const drawFound = checkDraw();
+                    if (drawFound) {
                         return;
                     }
                     switchPlayer();
@@ -109,18 +107,18 @@ const GameController = (() => {
 
         const startButton = document.getElementById('startButton');
         const resetButton = document.getElementById('resetButton');
-        
+
         startButton.addEventListener('click', () => {
             Gameboard.reset();
             currentPlayer = playerX;
-            messageDisplay.textContent = `${currentPlayer.name}'s Turn`;
+            messageDisplay.textContent = `${currentPlayer.name}'s Turn!`;
             gameActive = true;
         });
 
         resetButton.addEventListener('click', () => {
             Gameboard.reset();
             currentPlayer = playerX;
-            messageDisplay.textContent = `${currentPlayer.name}'s Turn`;
+            messageDisplay.textContent = `${currentPlayer.name}'s Turn!`;
             gameActive = true;
             playerXScore = 0;
             playerOScore = 0;
@@ -128,7 +126,7 @@ const GameController = (() => {
             playerOScoreDisplay.textContent = playerOScore;
         });
     };
-   
+
     const checkWin = () => {
         const board = Gameboard.getBoard();
 
@@ -159,8 +157,7 @@ const GameController = (() => {
 
     const checkDraw = () => {
         const board = Gameboard.getBoard();
-
-        if(!board.includes("") && !checkWin()) {
+        if (!board.includes("")) {
             gameActive = false;
             messageDisplay.textContent = "It's a Draw!";
             return true;
@@ -169,7 +166,7 @@ const GameController = (() => {
     };
 
     document.addEventListener('DOMContentLoaded', initializeGame);
-    
+
     return {
         initializeGame
     };
