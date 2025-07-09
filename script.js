@@ -20,6 +20,7 @@ const Gameboard = (() => {
             gameBoardDiv.appendChild(cellElement);
         });
     };
+
     const updateCell = (index, marker) => {
         if (board[index] === "") {
             board[index] = marker;
@@ -28,10 +29,12 @@ const Gameboard = (() => {
         }
         return false;
     };
+
     const reset = () => {
         board = ["", "", "", "", "", "", "", "", ""];
         render();
     };
+
     return {
         getBoard,
         render,
@@ -39,18 +42,29 @@ const Gameboard = (() => {
         reset
     };
 })();
+
+
+const Player = (name, marker) => {
+    return {name, marker};
+}
+
+
 const GameController = (() => {
     const playerX = Player("Player X", "X");
     const playerO = Player("Player O", "O");
     let currentPlayer = playerX;
+
     const messageDisplay = document.getElementById('message');
+
     const switchPlayer = () => {
         currentPlayer = (currentPlayer === playerX) ? playerO : playerX;
         messageDisplay.textContent = `${currentPlayer.name}'s Turn`;
     };
+
     const initializeGame = () => {
         Gameboard.render();
         messageDisplay.textContent = `${currentPlayer.name}'s Turn!`;
+
         const gameBoardDiv = document.querySelector('.game-board');
         gameBoardDiv.addEventListener('click', (event) => {
             if (event.target.classList.contains('cell')) {
@@ -60,6 +74,7 @@ const GameController = (() => {
                 }
             }
         });
+
         const startButton = document.getElementById('startButton');
         const resetButton = documento.getElementById('resetButton');
         
@@ -68,13 +83,16 @@ const GameController = (() => {
             currentPlayer = playerX;
             messageDisplay.textContent = `${currentPlayer.name}'s Turn`;
         });
+
         resetButton.addEventListener('click', () => {
             Gameboard.reset();
             currentPlayer = playerX;
             messageDisplay.textContent = `${currentPlayer.anem}'s Turn`;
         });
     };
+
     document.addEventListener('DOMContentLoaded', initializeGame);
+    
     return {
         initializeGame
     };
