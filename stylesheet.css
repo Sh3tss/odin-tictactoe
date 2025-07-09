@@ -1,0 +1,108 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    font-family:'Arial', sans-serif;
+    background-color: #f0f2f5;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+.container {
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+    padding: 30px;
+    text-align:center;
+    width: 90%;
+    max-width: 400px;
+}
+h1 {
+    color: #34495e;
+    margin-bottom: 20px;
+    font-size: 2.2em;
+}
+.score-display {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 25px;
+    font-size: 1.1em;
+    color: #555;
+    background-color: #ecf0f1;
+    padding: 10px;
+    border-radius: 8px;
+}
+.socre-display span {
+    font-weight: bold;
+    color: #3498db;
+}
+.game-board {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    width: 300px;
+    height: 300px;
+    margin: 0 auto 25px auto;
+    border: 3px solid #2c3e50;
+    border-radius: 8px;
+    overflow: hidden;
+}
+.cell {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 3em;
+    font-weight: bold;
+    cursor: pointer;
+    border: 1px solid #bdc3c7;
+    transition: background-color 0.2s ease;
+}
+.cell:hover {
+    background-color: #e0e0e0;
+}
+.cell.X {
+    color: #e74c3c;
+}
+.cell.O {
+    color: #3498db;
+}
+.game-info {
+    margin-bottom: 25px;
+    font-size: 1.2em;
+    color: #444;
+    font-weight: bold;
+}
+.game-controls {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+.game-controls button {
+    padding: 12px 25px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    color: white;
+    font-weight: bold;
+}
+#startButton {
+    background-color: #27ae60;
+}
+#startButton:hover {
+    background-color: #229954;
+    transform: translateY(-2px);
+}
+#resetButton {
+    background-color: #e67e22;
+}
+#resetButton:hover {
+    background-color: #d35400;
+    transform: translateY(-2px);
+}
